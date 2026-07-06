@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Другий мозок — як перестати губити власні думки</title>
+<style>
+  :root{
+    --bg:#12141a; --fg:#e8e6e1; --muted:#9a9790; --accent:#e8b23a; --card:#1b1e27;
+    --danger:#e06c5b; --ok:#7fb37a;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--bg); color:var(--fg);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    overflow:hidden;
+  }
+  .slide{
+    position:absolute; inset:0; display:none;
+    flex-direction:column; justify-content:center;
+    padding:6vh 8vw; max-width:1100px; margin:0 auto;
+  }
+  .slide.active{display:flex}
+  .kicker{color:var(--accent); text-transform:uppercase; letter-spacing:.14em;
+    font-size:clamp(11px,1.4vw,14px); margin-bottom:1.2em; font-weight:600}
+  h1{font-size:clamp(30px,5.4vw,64px); line-height:1.12; letter-spacing:-.02em}
+  h2{font-size:clamp(24px,4vw,46px); line-height:1.15; letter-spacing:-.015em; margin-bottom:.7em}
+  p,li{font-size:clamp(16px,2.2vw,24px); line-height:1.5; color:var(--fg)}
+  .sub{color:var(--muted); margin-top:1em; font-size:clamp(15px,1.9vw,21px)}
+  ul{list-style:none; margin-top:.4em}
+  li{margin:.55em 0; padding-left:1.3em; position:relative}
+  li::before{content:"—"; position:absolute; left:0; color:var(--accent)}
+  .quote{
+    background:var(--card); border-left:4px solid var(--accent); border-radius:0 12px 12px 0;
+    padding:1em 1.2em; margin:1.2em 0; font-style:italic;
+    font-size:clamp(17px,2.4vw,26px); line-height:1.45;
+  }
+  .quote .who{display:block; font-style:normal; color:var(--muted);
+    font-size:clamp(12px,1.5vw,15px); margin-top:.6em}
+  .lesson{
+    margin-top:1.4em; padding:.8em 1.1em; border-radius:12px;
+    background:var(--card); font-weight:600;
+    font-size:clamp(17px,2.4vw,26px);
+  }
+  .lesson b{color:var(--accent)}
+  .stats{display:flex; flex-wrap:wrap; gap:2.2vw; margin-top:1.4em}
+  .stat{min-width:180px; flex:1}
+  .stat .n{font-size:clamp(34px,5.6vw,68px); font-weight:700; color:var(--accent);
+    font-variant-numeric:tabular-nums; letter-spacing:-.02em}
+  .stat .l{color:var(--muted); font-size:clamp(13px,1.7vw,17px); margin-top:.2em; line-height:1.35}
+  .flow{display:flex; flex-wrap:wrap; align-items:center; gap:.6em; margin-top:1.3em}
+  .step{background:var(--card); border-radius:12px; padding:.7em 1em;
+    font-size:clamp(15px,2vw,21px)}
+  .arr{color:var(--accent); font-size:clamp(18px,2.6vw,28px)}
+  .bad::before{content:"✕"; color:var(--danger)}
+  .good::before{content:"✓"; color:var(--ok)}
+  .progress{position:fixed; left:0; bottom:0; height:4px; background:var(--accent);
+    transition:width .25s ease; z-index:10}
+  .pager{position:fixed; right:16px; bottom:12px; color:var(--muted);
+    font-size:13px; font-variant-numeric:tabular-nums; z-index:10}
+  .hint{position:fixed; left:16px; bottom:10px; color:var(--muted); font-size:12px; z-index:10; opacity:.7}
+  @media (max-width:640px){ .slide{padding:5vh 7vw} .stats{gap:5vw} }
+</style>
+</head>
+<body>
+
+<!-- 1 -->
+<section class="slide active">
+  <div class="kicker">Домашній мітап</div>
+  <h1>Другий мозок:<br>як перестати губити власні думки</h1>
+  <p class="sub">Практична історія одного місяця: нотатки, AI-агенти й трохи чесних провалів.<br>Олексій · липень 2026</p>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+  <h2>Знайомо?</h2>
+  <ul>
+    <li>Думка прийшла на прогулянці / у душі / за кермом — «потім запишу»</li>
+    <li>«Потім» = збережене в Telegram, скріншоти, п'ять застосунків для нотаток</li>
+    <li>Нічого з цього більше ніколи не відкривається</li>
+  </ul>
+  <div class="quote">«Ідеї записую у збережене — і потім не роблю. Кладовище ідей.»
+    <span class="who">— моя власна нотатка, 7 червня</span>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="slide">
+  <h2>«Другий мозок» — це взагалі що?</h2>
+  <p>Зовнішнє місце для твоїх думок, якому ти довіряєш.</p>
+  <p class="sub">Головний критерій: воно має <b style="color:var(--accent)">працювати на тебе</b> — відповідати на запитання, показувати зв'язки, нагадувати про важливе. Просто зберігати вміє й коробка на балконі.</p>
+</section>
+
+<!-- 4 -->
+<section class="slide">
+  <div class="kicker">Спроба №1</div>
+  <h2>Звалище</h2>
+  <p>Закинув у базу все: нотатки за роки, документи, збережене, робочі файли.</p>
+  <div class="quote">«Закинув усе це в базу. І взагалі не бачу ніякої користі. Навіщо я це зробив?»
+    <span class="who">— я, за тиждень</span>
+  </div>
+  <div class="lesson">Урок 1: <b>звалище ≠ мозок.</b> Працюють ~30 відібраних сторінок, а не 500 сирих нотаток.</div>
+</section>
+
+<!-- 5 -->
+<section class="slide">
+  <div class="kicker">Спроба №2</div>
+  <h2>Модна технологія</h2>
+  <p>Векторна база, семантичний пошук, docker, ембеддинги — все «як у дорослих».</p>
+  <ul>
+    <li>Прожила <b>22 дні</b></li>
+    <li>Три найдовші розмови з AI за місяць — ремонт цієї інфраструктури, а не робота з думками</li>
+  </ul>
+  <div class="lesson">Урок 2: <b>якщо підтримка дорожча за користь — викидай.</b> Навіть якщо шкода. Особливо якщо шкода.</div>
+</section>
+
+<!-- 6 -->
+<section class="slide">
+  <h2>Що зрештою працює: аж смішно просто</h2>
+  <div class="flow">
+    <div class="step">📁 Папка текстових файлів</div>
+    <div class="arr">+</div>
+    <div class="step">🕓 Історія змін (git)</div>
+    <div class="arr">+</div>
+    <div class="step">🤖 AI, який читає все одразу</div>
+  </div>
+  <p class="sub">~100 сторінок — уся база вміщується в один запит до сучасного AI. Пошук не потрібен: він просто читає все й відповідає. Нотатки пов'язані посиланнями, як маленька особиста вікіпедія.</p>
+</section>
+
+<!-- 7 -->
+<section class="slide">
+  <h2>Як виглядає мій день</h2>
+  <div class="flow">
+    <div class="step">🎙 Голосове боту в Telegram —<br>на ходу, телефон у кишені</div>
+    <div class="arr">→</div>
+    <div class="step">🤖 Агент розшифровує<br>і кладе в базу з посиланнями</div>
+    <div class="arr">→</div>
+    <div class="step">💬 Увечері одне слово:<br>«ingest»</div>
+  </div>
+  <p class="sub">Тертя = нуль. Саме тому воно працює: будь-яка система помирає там, де записувати лінь.</p>
+</section>
+
+<!-- 8 -->
+<section class="slide">
+  <h2>Один місяць у цифрах</h2>
+  <div class="stats">
+    <div class="stat"><div class="n">547</div><div class="l">повідомлень боту<br>за 22 активні дні</div></div>
+    <div class="stat"><div class="n">156</div><div class="l">думок спіймано<br>(64 — голосом)</div></div>
+    <div class="stat"><div class="n">102</div><div class="l">сторінки в базі,<br>145 оновлень за 24 дні</div></div>
+  </div>
+  <p class="sub">Це не дисципліна. Це відсутність тертя.</p>
+</section>
+
+<!-- 9 -->
+<section class="slide">
+  <h2>Що це реально мені дає</h2>
+  <ul>
+    <li><b>«Що зараз для мене важливо?»</b> — одна команда, і агент збирає сторінку гарячих тем з усієї бази</li>
+    <li><b>«Що я думав про X місяць тому?»</b> — відповідь із цитатами з моїх же записів</li>
+    <li><b>Ідеї отримують життя:</b> голосова нотатка → за кілька тижнів → опубліковане відео, призначені зустрічі, реальні кроки</li>
+  </ul>
+</section>
+
+<!-- 10 -->
+<section class="slide">
+  <h2>Агенти: база обслуговує себе сама</h2>
+  <ul>
+    <li>Щоранку агент перевіряє цілісність бази й надсилає звіт у Telegram</li>
+    <li>Раз на тиждень — зведення: що повторюється, що забуто</li>
+    <li>Помилився агент — видно в історії змін, усе відкочується</li>
+  </ul>
+  <div class="lesson">Принцип: <b>делегуй виконання, не відповідальність.</b> Агент робить — я вирішую.</div>
+</section>
+
+<!-- 11 -->
+<section class="slide">
+  <h2>Чесні анти-поради</h2>
+  <ul>
+    <li class="bad">Не тягни в базу все підряд — куруй, як бібліотекар</li>
+    <li class="bad">Не будуй систему заради системи — спершу користь, потім інфраструктура</li>
+    <li class="bad">Просто записувати — мало. База живе, коли її <b>питаєш</b></li>
+  </ul>
+  <p class="sub">Кожен із цих пунктів — мої втрачені дні, не теорія.</p>
+</section>
+
+<!-- 12 -->
+<section class="slide">
+  <h2>Неочікуваний побічний ефект</h2>
+  <p>Коли перечитуєш свої думки за місяць — починаєш бачити <b style="color:var(--accent)">повтори</b>: що знову й знову дає енергію, а що знову й знову її забирає.</p>
+  <p class="sub">Ясність про себе приходить із власних даних краще, ніж із чужих порад. Це виявилося ціннішим за саму систему.</p>
+</section>
+
+<!-- 13 -->
+<section class="slide">
+  <h2>З чого почати завтра (без програмування)</h2>
+  <ul>
+    <li>Одне місце захоплення: Telegram Saved Messages або будь-які нотатки. Голосом — можна</li>
+    <li>Раз на тиждень: вставити все в будь-який AI-чат і спитати: <i>«що тут повторюється? що з цього важливо?»</i></li>
+    <li>Все. Цього достатньо, щоб відчути ефект. Решта — за апетитом</li>
+  </ul>
+</section>
+
+<!-- 14 -->
+<section class="slide">
+  <h2>Підсумок</h2>
+  <p style="font-size:clamp(22px,3.4vw,38px); line-height:1.35">Просте зберігання<br>+ нуль тертя на вході<br>+ регулярна розмова зі своїми думками</p>
+  <p class="sub" style="margin-top:1.2em">— б'є будь-який модний тул. Перевірено на собі, з чеками.</p>
+</section>
+
+<!-- 15 -->
+<section class="slide">
+  <div class="kicker">Дякую</div>
+  <h1>Питання?</h1>
+  <p class="sub">Олексій · пишу про AI-експерименти в Threads · липень 2026</p>
+</section>
+
+<div class="progress" id="bar"></div>
+<div class="pager" id="pager"></div>
+<div class="hint">← → або клік</div>
+
+<script>
+(function(){
+  var slides=document.querySelectorAll('.slide'), n=slides.length, i=0;
+  var bar=document.getElementById('bar'), pager=document.getElementById('pager');
+  function show(k){
+    i=Math.max(0,Math.min(n-1,k));
+    slides.forEach(function(s,j){s.classList.toggle('active',j===i)});
+    bar.style.width=((i+1)/n*100)+'%';
+    pager.textContent=(i+1)+' / '+n;
+    location.hash=i+1;
+  }
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown') show(i+1);
+    if(e.key==='ArrowLeft'||e.key==='PageUp') show(i-1);
+    if(e.key==='Home') show(0);
+    if(e.key==='End') show(n-1);
+  });
+  document.addEventListener('click',function(e){
+    if(e.clientX>window.innerWidth*0.25) show(i+1); else show(i-1);
+  });
+  var tx=null;
+  document.addEventListener('touchstart',function(e){tx=e.touches[0].clientX});
+  document.addEventListener('touchend',function(e){
+    if(tx===null) return;
+    var dx=e.changedTouches[0].clientX-tx;
+    if(dx<-40) show(i+1); if(dx>40) show(i-1); tx=null;
+  });
+  var h=parseInt(location.hash.slice(1),10);
+  show(isNaN(h)?0:h-1);
+})();
+</script>
+</body>
+</html>
